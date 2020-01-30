@@ -1,12 +1,12 @@
 export class Reservation {
-    firstName: string;
-    lastName: string;
-    departureDate: string;
-    returnDate: string;
+    firstName: string = "John";
+    lastName: string = "Last";
+    departureDate: string = "Today + 30";
+    returnDate: string = "Today + 40";
     tripType: string = "RoundTrip";
     //seats:number;
-    origin: string;
-    destination: string;
+    origin: string = "DFW";
+    destination: string = "LAX";
     selectSeats: boolean = true;
 }
 

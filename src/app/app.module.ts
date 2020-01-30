@@ -15,8 +15,8 @@ import { TicketPnrComponent } from './ticket-pnr/ticket-pnr.component';
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { HomeComponent } from './home/home.component';
 import { RouterModule,Routes } from "@angular/router";
-const appRoutes:Routes=[{path:"",component:HomeComponent},
-{path:"pnrCreation",component:pnrCreationComponent},
+const appRoutes:Routes=[{path:"",component:pnrCreationComponent},
+{path:"createPnr",component:pnrCreationComponent},
 {path:"cancelPnr",component:CancelPnrComponent},
 {path:"ticketPnr",component:TicketPnrComponent}];
 
@@ -44,7 +44,7 @@ const appRoutes:Routes=[{path:"",component:HomeComponent},
   // providers: [{provide:HTTP_INTERCEPTORS,
   //   useClass:myInterceptor,
   // multi:true}],
-  
+
   bootstrap: [HomeComponent]
 })
 export class AppModule {
