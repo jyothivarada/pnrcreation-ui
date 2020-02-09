@@ -1,19 +1,19 @@
-import {Injectable} from "@angular/core";
-import {Observable} from "rxjs";
-import { HttpRequest, HttpHandler,HttpEvent } from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {Observable} from 'rxjs';
+import {HttpEvent, HttpHandler, HttpRequest} from '@angular/common/http';
 
 @Injectable({
-    providedIn:"root"
+    providedIn: 'root'
 })
 
-export class myInterceptor{
+export class PnrInterceptor {
 
-    intercept(req:HttpRequest<any>,handler:HttpHandler):Observable<HttpEvent<any>>{
+    intercept(req: HttpRequest<any>, handler: HttpHandler): Observable<HttpEvent<any>> {
 
-        const req1=req.clone({
-            setHeaders:{
-            "authorization":"admin,@dMin007!-"
-        }
+        const req1 = req.clone({
+            setHeaders: {
+                'authorization': 'admin,@dMin007!-'
+            }
         });
         return handler.handle(req1);
     }

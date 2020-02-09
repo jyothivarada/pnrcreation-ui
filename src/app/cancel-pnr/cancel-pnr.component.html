@@ -1,1 +1,9 @@
-<p>cancel-pnr works!</p>
+<div style="padding-left: 20px; padding-bottom: 20px; padding-right: 20px; padding-top: 20px">
+    <form class="example-form">
+        <mat-form-field >
+            <input matInput placeholder="pnr" name="pnr" [(ngModel)]="pnr" style="width: border-box">
+        </mat-form-field>
+        &nbsp;&nbsp;&nbsp;
+        <button class="btn btn-outline-primary"  type="submit" (click)="cancelPnr()" mat-raised-button>Submit</button>
+    </form>
+</div>

@@ -1,4 +1,3 @@
-import { Reservation } from './reservation';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -7,17 +6,15 @@ import { Observable } from 'rxjs';
     providedIn: 'root'
 })
 
-export class PnrCreationService {
+export class CancelPnrService {
     constructor(private http: HttpClient) { }
-    public postData(reservation: Reservation): Observable<any> {
+    public cancelPnr(cancelPnr: string): Observable<any> {
         let headersObject = new HttpHeaders();
         headersObject = headersObject.set('Content-Type', 'application/json');
         headersObject = headersObject.set('Authorization', 'Basic ' + btoa('admin:@dMin007!-'));
         const options = {
             headers : headersObject
         };
-        return this.http.post('https://pnr-creation.mybluemix.net/sabrepnr/createReservation', reservation, options);
+        return this.http.get('https://pnr-creation.mybluemix.net/sabrepnr/cancel/' + cancelPnr, options);
     }
 }
-
-

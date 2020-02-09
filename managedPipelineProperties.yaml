@@ -1,0 +1,42 @@
+#apiVersion: master
+type: npm
+integrationBranches:
+- dev
+- stage
+- preprod
+- master
+pipelineAdministrators:
+- 916688
+- 848373
+- 234392
+notifications:
+  emails:
+  - sravan.oddiraju@aa.com
+env:
+  variables:
+    CF_API_URL: 'https://api.ng.bluemix.net'
+    CF_SPACE: 'IU-BE-Buyout-dev'
+CI:
+#coverity:
+#CONFIG: ['javafs','javascript']
+CD:
+  deployments:
+    dev:
+      env:
+        variables:
+          CF_ORG: 'AA-CustTech-Change'
+          CF_SPACE: 'IU-BE-Buyout-dev'
+          CF_APP_NAME: 'aa-ct-change-instant-upsell-teaser-dev'
+          CF_API_URL: 'https://api.ng.bluemix.net'
+          CF_DATACENTER: 'public'
+          CF_API_KEY: 'IBMCloudKeyForCTChange'
+          CF_MANIFEST_PATH: 'devops/bluemix/manifest.yml'
+      actions:
+        - name: 'extract npm package tar which contains dist folder within package folder'
+          steps: |
+            sh 'tar -xvf Instant-Upsell-Teaser*'
+        - name: 'using cfDeploy'
+          action: 'cfBlueGreenDeploy'
+      sourceBranches:
+        - master
+

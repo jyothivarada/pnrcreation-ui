@@ -1,4 +1,12 @@
+<div style="padding-left: 20px; padding-bottom: 20px; padding-right: 20px">
 <form class="example-form">
+    <br>
+        <mat-radio-group [(ngModel)]="reservation.tripType" name="triptype" color="primary" (change)="tripTypeSelected()">
+            <mat-radio-button value="OneWay">One Way</mat-radio-button>
+            &nbsp;&nbsp;&nbsp;
+            <mat-radio-button value="RoundTrip">Round Trip</mat-radio-button>
+        </mat-radio-group>
+    <br>
     <br>
     <mat-form-field class="example-full-width">
         <input matInput placeholder="First Name" name="first" [(ngModel)]="reservation.firstName">
@@ -30,16 +38,22 @@
       <mat-datepicker-toggle matSuffix [for]="return"></mat-datepicker-toggle>
       <mat-datepicker #return></mat-datepicker>
     </mat-form-field> -->
+    <!--<mat-form-field>-->
+        <!--&lt;!&ndash;<radio-group aria-label="Trip Type" [(ngModel)]="reservation.tripType">&ndash;&gt;-->
+            <!--&lt;!&ndash;<radio-button value="OneWay">One Way</radio-button>&ndash;&gt;-->
+            <!--&lt;!&ndash;<radio-button value="RoundTrip">Round Trip</radio-button>&ndash;&gt;-->
+        <!--&lt;!&ndash;</radio-group>&ndash;&gt;-->
+    <!--</mat-form-field>-->
+
     <mat-form-field class="example-full-width">
         <input matInput placeholder="Departure Date" name="departure" [(ngModel)]="reservation.departureDate">
     </mat-form-field>
     &nbsp;
-    <mat-form-field class="example-full-width">
+    <mat-form-field class="example-full-width" [(hidden)]="returnHidden">
         <input matInput placeholder="Return Date" name="return" [(ngModel)]="reservation.returnDate">
     </mat-form-field>
     <br>
     <br>
-
     <mat-form-field>
         <mat-label>Seats</mat-label>
         <mat-select [(ngModel)]="reservation.selectSeats" name="seat">
@@ -52,16 +66,22 @@
         </mat-select>
     </mat-form-field>
     <br>
-    <br>
-    <div class="example-button-row">
-        <button type="submit" (click)="submitData()" mat-raised-button>Create</button>
+    <div class="example-button-row" >
+        <button class="btn btn-outline-primary"  type="submit" (click)="submitData()" mat-raised-button>Submit</button>
     </div>
     <br>
     <br>
-    <div>
-        <label>Pnr Details</label>
-        <label>{{this.pnr}}</label>
+    <div class="example-button-row" >
+        <mat-form-field>
+            <mat-label>Pnr Details:</mat-label>
+            <textarea matInput readonly rows="3">{{this.pnrDetails}}</textarea>
+        </mat-form-field>
+        &nbsp;&nbsp;&nbsp;
+        <button type="submit" (click)="openUrl('qasilo6-sjc.aa.com')" mat-raised-button class="btn btn-outline-primary">qasilo6</button>
+        &nbsp;
+        <button type="submit" (click)="openUrl('qasilo17-sjc.aa.com')" mat-raised-button class="btn btn-outline-primary">qasilo17</button>
+        &nbsp;
+        <button type="submit" (click)="openUrl('iqa2.aa.com')" mat-raised-button class="btn btn-outline-primary">iqa2</button>
     </div>
-
 </form>
-
+</div>

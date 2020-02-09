@@ -1,11 +1,19 @@
-<H1>PNR CREATION</H1>
-<nav mat-tab-nav-bar>
-    <a mat-tab-link
-       *ngFor="let link of navLinks"
-       [routerLink]="link.path"
-       routerLinkActive #rla="routerLinkActive"
-       [active]="rla.isActive">
-      {{link.label}}
-    </a>
-  </nav>
-  <router-outlet></router-outlet>
+<div class="container" style="padding-top: 20px">
+    <div class="mat-expansion-panel" >
+        <mat-toolbar>
+            <span>PNR Creation</span>
+        </mat-toolbar>
+        <div>
+            <nav mat-tab-nav-bar>
+                <a mat-tab-link
+                   *ngFor="let link of navLinks"
+                   [routerLink]="link.path"
+                   routerLinkActive #rla="routerLinkActive"
+                   [active]="rla.isActive">
+                    {{link.label}}
+                </a>
+            </nav>
+        </div>
+        <router-outlet></router-outlet>
+    </div>
+</div>
