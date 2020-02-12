@@ -1,11 +1,12 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatInputModule} from '@angular/material/input';
 import {MatDatepickerModule, MatNativeDateModule, MatRadioModule, MatSpinner} from '@angular/material';
 import {MatSelectModule} from '@angular/material/select';
 import {MatButtonModule} from '@angular/material/button';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
 import {MatTabsModule} from '@angular/material/tabs';
 import {PnrCreationComponent} from './pnr-creation.component';
@@ -14,6 +15,9 @@ import {TicketPnrComponent} from './ticket-pnr/ticket-pnr.component';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {HomeComponent} from './home/home.component';
 import {RouterModule, Routes} from '@angular/router';
+import {LoaderComponent} from './loader/loader.component';
+import { LoaderService } from './services/loader.service';
+import {LoaderInterceptor} from './interceptors/loader.interceptor';
 
 const appRoutes: Routes = [{path: '', component: PnrCreationComponent},
     {path: 'createPnr', component: PnrCreationComponent},
@@ -25,7 +29,8 @@ const appRoutes: Routes = [{path: '', component: PnrCreationComponent},
         PnrCreationComponent,
         CancelPnrComponent,
         TicketPnrComponent,
-        HomeComponent
+        HomeComponent,
+        LoaderComponent
     ],
     imports: [
         BrowserModule,
@@ -40,11 +45,13 @@ const appRoutes: Routes = [{path: '', component: PnrCreationComponent},
         MatTabsModule,
         MatToolbarModule,
         MatRadioModule,
+        MatProgressSpinnerModule,
         RouterModule.forRoot(appRoutes)
     ],
-    // providers: [{provide:HTTP_INTERCEPTORS,
-    //   useClass:PnrInterceptor,
-    // multi:true}],
+    providers: [
+        LoaderService,
+        { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true }
+    ],
     bootstrap: [HomeComponent]
 })
 export class AppModule {

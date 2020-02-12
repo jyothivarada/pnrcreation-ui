@@ -124,6 +124,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "pnrCreation"
+    }
+  },
+  "defaultProject": "pnrCreation",
+  "cli": {
+    "analytics": false
+  }
 }
