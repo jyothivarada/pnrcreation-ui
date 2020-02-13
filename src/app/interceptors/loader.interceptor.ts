@@ -3,7 +3,7 @@ import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from "@angular/c
 import { Observable } from "rxjs";
 import { finalize } from "rxjs/operators";
 
-import { LoaderService } from '../services/loader.service';
+import { LoaderService } from '../loader/loader.service';
 
 @Injectable()
 export class LoaderInterceptor implements HttpInterceptor {

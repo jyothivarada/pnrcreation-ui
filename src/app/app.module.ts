@@ -9,14 +9,14 @@ import {MatButtonModule} from '@angular/material/button';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
 import {MatTabsModule} from '@angular/material/tabs';
-import {PnrCreationComponent} from './pnr-creation.component';
+import {PnrCreationComponent} from './pnr-creation/pnr-creation.component';
 import {CancelPnrComponent} from './cancel-pnr/cancel-pnr.component';
 import {TicketPnrComponent} from './ticket-pnr/ticket-pnr.component';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {HomeComponent} from './home/home.component';
 import {RouterModule, Routes} from '@angular/router';
 import {LoaderComponent} from './loader/loader.component';
-import { LoaderService } from './services/loader.service';
+import { LoaderService } from './loader/loader.service';
 import {LoaderInterceptor} from './interceptors/loader.interceptor';
 
 const appRoutes: Routes = [{path: '', component: PnrCreationComponent},

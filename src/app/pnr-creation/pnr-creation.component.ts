@@ -1,4 +1,4 @@
-import {Reservation} from './reservation';
+import {Reservation} from '../model/reservation';
 import {Component} from '@angular/core';
 import {PnrCreationService} from './pnrCreation.service';
 import {HttpErrorResponse} from '@angular/common/http';
@@ -6,7 +6,6 @@ import {HttpErrorResponse} from '@angular/common/http';
 @Component({
     selector: 'app-root',
     templateUrl: './pnr-creation.component.html',
-    styleUrls: ['./app.component.css']
 })
 export class PnrCreationComponent {
     title = 'pnrCreation';

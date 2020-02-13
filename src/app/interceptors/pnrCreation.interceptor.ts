@@ -12,7 +12,7 @@ export class PnrInterceptor {
 
         const req1 = req.clone({
             setHeaders: {
-                'authorization': 'admin,@dMin007!-'
+                'authorization' : 'admin,@dMin007!-'
             }
         });
         return handler.handle(req1);
