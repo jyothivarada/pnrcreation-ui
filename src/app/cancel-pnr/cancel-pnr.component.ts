@@ -10,6 +10,7 @@ import {HttpErrorResponse} from '@angular/common/http';
 export class CancelPnrComponent implements OnInit {
 
   pnr = '';
+  pnrResponse = ' ';
   constructor(private service: CancelPnrService) { }
 
   ngOnInit() {
@@ -18,7 +19,9 @@ export class CancelPnrComponent implements OnInit {
     public cancelPnr() {
       this.service.cancelPnr(this.pnr).subscribe((posRes) => {
             console.log(posRes);
+            this.pnrResponse = 'Pnr Cancellation Successful';
         }, (errRes: HttpErrorResponse) => {
+            this.pnrResponse = 'Pnr Cancellation Failed';
             if (errRes.error instanceof Error) {
                 console.log('client side error');
             } else {

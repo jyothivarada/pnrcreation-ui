@@ -3,7 +3,7 @@ import {NgModule} from '@angular/core';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatInputModule} from '@angular/material/input';
-import {MatDatepickerModule, MatNativeDateModule, MatRadioModule, MatSpinner} from '@angular/material';
+import {MatCardModule, MatDatepickerModule, MatNativeDateModule, MatRadioModule, MatSpinner} from '@angular/material';
 import {MatSelectModule} from '@angular/material/select';
 import {MatButtonModule} from '@angular/material/button';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
@@ -18,11 +18,14 @@ import {RouterModule, Routes} from '@angular/router';
 import {LoaderComponent} from './loader/loader.component';
 import { LoaderService } from './loader/loader.service';
 import {LoaderInterceptor} from './interceptors/loader.interceptor';
+import { PnrDetailsComponent } from './pnr-details/pnr-details.component';
 
 const appRoutes: Routes = [{path: '', component: PnrCreationComponent},
     {path: 'createPnr', component: PnrCreationComponent},
     {path: 'cancelPnr', component: CancelPnrComponent},
-    {path: 'ticketPnr', component: TicketPnrComponent}];
+    {path: 'ticketPnr', component: TicketPnrComponent},
+    {path: 'pnrDetails', component: PnrDetailsComponent}];
+
 
 @NgModule({
     declarations: [
@@ -30,7 +33,8 @@ const appRoutes: Routes = [{path: '', component: PnrCreationComponent},
         CancelPnrComponent,
         TicketPnrComponent,
         HomeComponent,
-        LoaderComponent
+        LoaderComponent,
+        PnrDetailsComponent
     ],
     imports: [
         BrowserModule,
@@ -46,6 +50,7 @@ const appRoutes: Routes = [{path: '', component: PnrCreationComponent},
         MatToolbarModule,
         MatRadioModule,
         MatProgressSpinnerModule,
+        MatCardModule,
         RouterModule.forRoot(appRoutes)
     ],
     providers: [

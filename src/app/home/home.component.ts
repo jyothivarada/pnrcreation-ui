@@ -9,8 +9,8 @@ export class HomeComponent implements OnInit {
     navLinks = [
         {path: 'createPnr', label: 'Create'},
         {path: 'cancelPnr', label: 'Cancel'},
-        {path: 'ticketPnr', label: 'Ticket'}
-    ];
+        {path: 'ticketPnr', label: 'Ticket'},
+        {path: 'pnrDetails', label: 'Pnr Details'}];
 
     constructor() {
     }
