@@ -6,6 +6,7 @@ import {HttpErrorResponse} from '@angular/common/http';
 @Component({
     selector: 'app-root',
     templateUrl: './pnr-creation.component.html',
+    styleUrls: ['./pnr-creation.component.css']
 })
 export class PnrCreationComponent {
     title = 'pnrCreation';
@@ -41,7 +42,9 @@ export class PnrCreationComponent {
     }
 
     public openUrl(url) {
-        url = url + '/reservation/view/find-your-trip?firstName=' + this.reservation.firstName + '&lastName=' + this.reservation.lastName + '&recordLocator=' + this.pnr;
-        window.open('https://' + url, '_blank');
+        if (this.pnr) {
+            url = url + '/reservation/view/find-your-trip?firstName=' + this.reservation.firstName + '&lastName=' + this.reservation.lastName + '&recordLocator=' + this.pnr;
+            window.open('https://' + url, '_blank');
+        }
     }
 }
