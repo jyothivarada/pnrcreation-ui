@@ -1,0 +1,22 @@
+<div style="padding-left: 20px; padding-bottom: 20px; padding-right: 20px; padding-top: 20px">
+    <form class="example-form">
+        <mat-form-field >
+            <input matInput placeholder="pnr" name="pnr" [(ngModel)]="pnr" style="width: border-box" maxlength="6" pattern="[a-zA-Z]*">
+        </mat-form-field>
+        &nbsp;
+        <button class="btn btn-outline-primary"  type="submit" (click)="pnrDetails()" mat-raised-button>Submit</button>
+        &nbsp;
+        &nbsp;
+        &nbsp;
+
+    </form>
+</div>
+<div style="padding-left: 5px; padding-bottom: 5px; padding-right: 5px" >
+    <mat-card>
+        <mat-form-field class="example-full-width">
+            <mat-label>Pnr Details:</mat-label>
+            &nbsp;&nbsp;
+            <textarea matInput readonly rows="35" cols="50"  >{{this.pnrResponse}}</textarea>
+        </mat-form-field>
+    </mat-card>
+</div>
