@@ -17,6 +17,12 @@ export class PnrCreationComponent {
     returnHidden = false;
 
     constructor(private service: PnrCreationService) {
+        const depatureDate = new Date();
+        const returnDate = new Date();
+        depatureDate.setDate(depatureDate.getDate() + 30);
+        this.reservation.departureDateUI = depatureDate;
+        returnDate.setDate(returnDate.getDate() + 40);
+        this.reservation.returnDateUI = returnDate;
     }
 
     // this.reservation.tripType = 'RoundTrip';
@@ -26,6 +32,10 @@ export class PnrCreationComponent {
 
     public submitData() {
         console.log(this.reservation.firstName);
+        const dep = this.reservation.departureDateUI;
+        const returnDate = this.reservation.returnDateUI;
+        this.reservation.departureDate = dep.getMonth() + '/' + dep.getDate() + '/' + dep.getFullYear();
+        this.reservation.returnDate = returnDate.getMonth() + '/' + returnDate.getDate() + '/' + returnDate.getFullYear();
         this.service.postData(this.reservation).subscribe((posRes) => {
             this.result = posRes;
             console.log(this.result.pnr);
