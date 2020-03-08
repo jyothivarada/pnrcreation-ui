@@ -1,14 +1,17 @@
 import {Reservation} from '../model/reservation';
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {PnrCreationService} from './pnrCreation.service';
 import {HttpErrorResponse} from '@angular/common/http';
+import {FormControl} from "@angular/forms";
+import {Observable} from "rxjs";
+import {map, startWith} from 'rxjs/operators';
 
 @Component({
     selector: 'app-root',
     templateUrl: './pnr-creation.component.html',
     styleUrls: ['./pnr-creation.component.css']
 })
-export class PnrCreationComponent {
+export class PnrCreationComponent implements OnInit {
     title = 'pnrCreation';
     result: any;
     pnrDetails = ' ';
@@ -16,6 +19,9 @@ export class PnrCreationComponent {
     reservation: Reservation = new Reservation();
     returnHidden = false;
     hide = 'ng-hide';
+    myControl = new FormControl();
+    options: string[] = ['F210M42 - Regular', 'F210M92 - Regular', 'F227M02 - Regular', 'F235M90 - Gold', 'F236M30 - Gold', 'F251M38 - Platinum', 'F252M04 - Platinum', 'F254M10 - Exec Plat', 'F258M06 - Exec Plat', '074JUN6 - Concierge key'];
+    filteredOptions: Observable<string[]>;
 
     constructor(private service: PnrCreationService) {
         const depatureDate = new Date();
@@ -24,6 +30,19 @@ export class PnrCreationComponent {
         this.reservation.departureDateUI = depatureDate;
         returnDate.setDate(returnDate.getDate() + 40);
         this.reservation.returnDateUI = returnDate;
+    }
+
+    ngOnInit() {
+        this.filteredOptions = this.myControl.valueChanges
+            .pipe(
+                startWith(''),
+                map(value => this._filter(value))
+            );
+    }
+
+    private _filter(value: string): string[] {
+        const filterValue = value.toLowerCase();
+        return this.options.filter(option => option.toLowerCase().includes(filterValue));
     }
 
     // this.reservation.tripType = 'RoundTrip';
@@ -37,6 +56,10 @@ export class PnrCreationComponent {
         const returnDate = this.reservation.returnDateUI;
         this.reservation.departureDate = dep.getMonth() + '/' + dep.getDate() + '/' + dep.getFullYear();
         this.reservation.returnDate = returnDate.getMonth() + '/' + returnDate.getDate() + '/' + returnDate.getFullYear();
+        const spitted = this.reservation.frequentFlyerNumber.split('-');
+        console.log(spitted);
+        this.reservation.frequentFlyerNumber = spitted[0].trim();
+
         this.service.postData(this.reservation).subscribe((posRes) => {
             this.result = posRes;
             console.log(this.result.pnr);

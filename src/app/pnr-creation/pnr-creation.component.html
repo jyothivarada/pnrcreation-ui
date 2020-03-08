@@ -22,14 +22,14 @@
         <br>
 
         <mat-form-field class="example-full-width">
-            <input matInput placeholder="Origin" name="origin" [(ngModel)]="reservation.origin" maxlength="3" pattern="[a-zA-Z]*">
+            <input matInput placeholder="Origin" name="origin" [(ngModel)]="reservation.origin" maxlength="3" pattern="[a-zA-Z]*" oninput="this.value = this.value.toUpperCase()">
         </mat-form-field>
         &nbsp;
         &nbsp;
         &nbsp;
         &nbsp;
         <mat-form-field class="example-full-width">
-            <input matInput placeholder="Destination" name="destination" [(ngModel)]="reservation.destination" maxlength="3" pattern="[a-zA-Z]*">
+            <input matInput placeholder="Destination" name="destination" [(ngModel)]="reservation.destination" maxlength="3" pattern="[a-zA-Z]*" oninput="this.value = this.value.toUpperCase()">
         </mat-form-field>
         <br>
 
@@ -69,9 +69,25 @@
                     </mat-select>
                 </mat-form-field>
                 &nbsp;
-                <mat-form-field>
-                    <input matInput placeholder="Frequent Flyer Number" name="frequentFlyerNumber" [(ngModel)]="reservation.frequentFlyerNumber">
+                <!--<mat-form-field>-->
+                    <!--<input matInput placeholder="Frequent Flyer Number" name="frequentFlyerNumber" [(ngModel)]="reservation.frequentFlyerNumber">-->
+                <!--</mat-form-field>-->
+
+                <mat-form-field class="example-full-width">
+                    <input type="text"
+                           placeholder="Frequent Flyer Number"
+                           [(ngModel)]="reservation.frequentFlyerNumber"
+                           aria-label="Number"
+                           matInput
+                           [formControl]="myControl"
+                           [matAutocomplete]="auto" >
+                    <mat-autocomplete #auto="matAutocomplete">
+                        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                            {{option}}
+                        </mat-option>
+                    </mat-autocomplete>
                 </mat-form-field>
+
                 <br>
                 <mat-checkbox [(ngModel)]="reservation.selectSeats" color="primary" [ngModelOptions]="{standalone: true}">Seats</mat-checkbox>
                 &nbsp;
@@ -103,25 +119,18 @@
                 &nbsp;
                 &nbsp;
                 <mat-checkbox [(ngModel)]="reservation.seniorPassenger" color="primary" [ngModelOptions]="{standalone: true}">Senior Passenger</mat-checkbox>
-
                 <br>
                 <mat-checkbox [(ngModel)]="reservation.infantPassengerInLap" color="primary" [ngModelOptions]="{standalone: true}">Infant Passenger In Lap</mat-checkbox>
-
                 &nbsp;
                 &nbsp;
                 <mat-checkbox [(ngModel)]="reservation.infantPassengerInSeat" color="primary" [ngModelOptions]="{standalone: true}">Infant Passenger In Seat</mat-checkbox>
-
-
             </mat-expansion-panel>
         </mat-accordion>
-
         <br>
-
         <div class="example-button-row" align="left" >
             <button class="btn btn-outline-primary"  type="submit" (click)="submitData()" mat-raised-button>Submit</button>
         </div>
         <br>
-
         </div>
     </form>
 </div>
