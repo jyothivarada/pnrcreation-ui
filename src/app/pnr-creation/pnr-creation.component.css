@@ -1,0 +1,16 @@
+.ng-hide {
+    height: 0;
+    width: 0;
+    background-color: transparent;
+    /*top:-200px;*/
+    /*left: 200px;*/
+}
+
+.ng-show {
+    transition: all linear 0.5s;
+    height: 100%;
+    width: 100%;
+    position: relative;
+    top: 0;
+    left: 0;
+}

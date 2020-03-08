@@ -1,6 +1,7 @@
 
 <div style="padding-left: 20px; padding-bottom: 5px; padding-right: 20px" >
     <form class="example-form">
+        <div style="width: fit-content">
         <br>
             <mat-radio-group [(ngModel)]="reservation.tripType" name="triptype" color="primary" (change)="tripTypeSelected()">
                 <mat-radio-button value="OneWay">One Way</mat-radio-button>
@@ -40,8 +41,8 @@
             <mat-datepicker #departure></mat-datepicker>
         </mat-form-field>
         &nbsp;
-        <mat-form-field>
-            <mat-label>Departure Date</mat-label>
+        <mat-form-field [(hidden)]="returnHidden">
+            <mat-label>Return Date</mat-label>
             <input matInput [matDatepicker]="return" [value]="reservation.returnDateUI" >
             <mat-datepicker-toggle matSuffix [for]="return"></mat-datepicker-toggle>
             <mat-datepicker #return></mat-datepicker>
@@ -49,29 +50,13 @@
 
         <br>
         <mat-accordion>
-            <mat-expansion-panel style="width: 45%">
+            <mat-expansion-panel style="width: fit-content" id="expansionPanel">
                 <mat-expansion-panel-header>
                     <mat-panel-title>
                     Advanced Options
                     </mat-panel-title>
                 </mat-expansion-panel-header>
                 <br>
-                <mat-form-field>
-                    <mat-label>Seats</mat-label>
-                    <mat-select [(ngModel)]="reservation.selectSeats" name="seat">
-                        <mat-option [value]="true">
-                            Yes
-                        </mat-option>
-                        <mat-option [value]="false">
-                            No
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
-                &nbsp;
-                <mat-form-field>
-                    <input matInput placeholder="Frequent Flyer Number" name="frequentFlyerNumber" [(ngModel)]="reservation.frequentFlyerNumber">
-                </mat-form-field>
-                &nbsp;
                 <mat-form-field>
                     <mat-label>Airline</mat-label>
                     <mat-select [(ngModel)]="reservation.aaFlight" name="aaflight">
@@ -83,86 +68,66 @@
                         </mat-option>
                     </mat-select>
                 </mat-form-field>
-
                 &nbsp;
                 <mat-form-field>
-                    <mat-label>Multi Passenger</mat-label>
-                    <mat-select [(ngModel)]="reservation.multiPassenger" name="multiPassenger">
-                        <mat-option [value]="true">
-                            Yes
-                        </mat-option>
-                        <mat-option [value]="false">
-                            No
-                        </mat-option>
-                    </mat-select>
+                    <input matInput placeholder="Frequent Flyer Number" name="frequentFlyerNumber" [(ngModel)]="reservation.frequentFlyerNumber">
                 </mat-form-field>
+                <br>
+                <mat-checkbox [(ngModel)]="reservation.selectSeats" color="primary" [ngModelOptions]="{standalone: true}">Seats</mat-checkbox>
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+
+                <mat-checkbox [(ngModel)]="reservation.multiPassenger" color="primary" [ngModelOptions]="{standalone: true}" style="padding-left: 6px">Adult Passenger</mat-checkbox>
+                <br>
+                <mat-checkbox [(ngModel)]="reservation.childPassenger" color="primary" [ngModelOptions]="{standalone: true}">Child Passenger</mat-checkbox>
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                <mat-checkbox [(ngModel)]="reservation.seniorPassenger" color="primary" [ngModelOptions]="{standalone: true}">Senior Passenger</mat-checkbox>
+
+                <br>
+                <mat-checkbox [(ngModel)]="reservation.infantPassengerInLap" color="primary" [ngModelOptions]="{standalone: true}">Infant Passenger In Lap</mat-checkbox>
 
                 &nbsp;
-                <mat-form-field>
-                    <mat-label>Child Passenger</mat-label>
-                    <mat-select [(ngModel)]="reservation.childPassenger" name="childPassenger">
-                        <mat-option [value]="true">
-                            Yes
-                        </mat-option>
-                        <mat-option [value]="false">
-                            No
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
-
                 &nbsp;
-                <mat-form-field>
-                    <mat-label>Senior Passenger</mat-label>
-                    <mat-select [(ngModel)]="reservation.seniorPassenger" name="seniorPassenger">
-                        <mat-option [value]="true">
-                            Yes
-                        </mat-option>
-                        <mat-option [value]="false">
-                            No
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
+                <mat-checkbox [(ngModel)]="reservation.infantPassengerInSeat" color="primary" [ngModelOptions]="{standalone: true}">Infant Passenger In Seat</mat-checkbox>
 
-                &nbsp;
-                <mat-form-field>
-                    <mat-label>Infant Passenger In Lap</mat-label>
-                    <mat-select [(ngModel)]="reservation.infantPassengerInLap" name="infantPassengerInLap">
-                        <mat-option [value]="true">
-                            Yes
-                        </mat-option>
-                        <mat-option [value]="false">
-                            No
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
-
-                &nbsp;
-                <mat-form-field>
-                    <mat-label>Infant Passenger In Seat</mat-label>
-                    <mat-select [(ngModel)]="reservation.infantPassengerInSeat" name="infantPassengerInSeat">
-                        <mat-option [value]="true">
-                            Yes
-                        </mat-option>
-                        <mat-option [value]="false">
-                            No
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
 
             </mat-expansion-panel>
         </mat-accordion>
 
         <br>
-        <br>
 
-        <div class="example-button-row" >
+        <div class="example-button-row" align="left" >
             <button class="btn btn-outline-primary"  type="submit" (click)="submitData()" mat-raised-button>Submit</button>
         </div>
         <br>
+
+        </div>
     </form>
 </div>
 
-<div style="padding-left: 5px; padding-bottom: 5px; padding-right: 5px">
+<div style="padding-left: 5px; padding-bottom: 10px; padding-right: 5px; width: fit-content"  >
+    <div [class]="hide">
     <mat-card>
             <mat-form-field>
                 <mat-label>Pnr Details:</mat-label>
@@ -175,4 +140,5 @@
             &nbsp;
             <button type="submit" (click)="openUrl('iqa2.aa.com')" mat-raised-button class="btn btn-outline-primary">iqa2</button>
     </mat-card>
+    </div>
 </div>

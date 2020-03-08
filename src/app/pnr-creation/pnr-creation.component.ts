@@ -15,6 +15,7 @@ export class PnrCreationComponent {
     pnr;
     reservation: Reservation = new Reservation();
     returnHidden = false;
+    hide = 'ng-hide';
 
     constructor(private service: PnrCreationService) {
         const depatureDate = new Date();
@@ -41,6 +42,7 @@ export class PnrCreationComponent {
             console.log(this.result.pnr);
             this.pnr = this.result.pnr;
             this.pnrDetails = 'PNR: ' + this.result.pnr + ' FirstName: ' + this.result.firstName + ' LastName: ' + this.result.lastName;
+            this.hide = 'ng-show';
         }, (errRes: HttpErrorResponse) => {
             if (errRes.error instanceof Error) {
                 console.log('client side error');

@@ -3,7 +3,7 @@ import {NgModule} from '@angular/core';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatInputModule} from '@angular/material/input';
-import {MatCardModule, MatDatepickerModule, MatNativeDateModule, MatRadioModule, MatExpansionModule, MatGridListModule} from '@angular/material';
+import {MatCardModule, MatDatepickerModule, MatNativeDateModule, MatRadioModule, MatExpansionModule, MatGridListModule, MatCheckboxModule} from '@angular/material';
 import {MatSelectModule} from '@angular/material/select';
 import {MatButtonModule} from '@angular/material/button';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
@@ -53,6 +53,7 @@ const appRoutes: Routes = [{path: '', component: PnrCreationComponent},
         MatCardModule,
         MatExpansionModule,
         MatGridListModule,
+        MatCheckboxModule,
         RouterModule.forRoot(appRoutes)
     ],
     providers: [
