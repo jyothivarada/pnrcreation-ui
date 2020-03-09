@@ -36,16 +36,16 @@
 
         <mat-form-field>
             <mat-label>Departure Date</mat-label>
-            <input matInput [matDatepicker]="departure" [value]="reservation.departureDateUI" >
-            <mat-datepicker-toggle matSuffix [for]="departure"></mat-datepicker-toggle>
-            <mat-datepicker #departure></mat-datepicker>
+            <input matInput [matDatepicker]="departureDt" [value]="reservation.departureDateUI" (dateChange)="onChangeDeparture($event.value)" >
+            <mat-datepicker-toggle matSuffix [for]="departureDt"></mat-datepicker-toggle>
+            <mat-datepicker #departureDt></mat-datepicker>
         </mat-form-field>
         &nbsp;
         <mat-form-field [(hidden)]="returnHidden">
             <mat-label>Return Date</mat-label>
-            <input matInput [matDatepicker]="return" [value]="reservation.returnDateUI" >
-            <mat-datepicker-toggle matSuffix [for]="return"></mat-datepicker-toggle>
-            <mat-datepicker #return></mat-datepicker>
+            <input matInput [matDatepicker]="returnDt" [value]="reservation.returnDateUI"  (dateChange)="onChangeReturn($event.value)" >
+            <mat-datepicker-toggle matSuffix [for]="returnDt"></mat-datepicker-toggle>
+            <mat-datepicker #returnDt></mat-datepicker>
         </mat-form-field>
 
         <br>
@@ -136,7 +136,7 @@
 </div>
 
 <div style="padding-left: 5px; padding-bottom: 10px; padding-right: 5px; width: fit-content"  >
-    <div [class]="hide">
+    <div>
     <mat-card>
             <mat-form-field>
                 <mat-label>Pnr Details:</mat-label>
