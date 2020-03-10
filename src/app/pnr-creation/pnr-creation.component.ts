@@ -30,6 +30,8 @@ export class PnrCreationComponent implements OnInit {
         this.reservation.departureDateUI = depatureDate;
         returnDate.setDate(returnDate.getDate() + 40);
         this.reservation.returnDateUI = returnDate;
+        this.reservation.departureDate = (depatureDate.getMonth() + 1) + '/' + depatureDate.getDate() + '/' + depatureDate.getFullYear();
+        this.reservation.returnDate = (returnDate.getMonth() + 1) + '/' + returnDate.getDate() + '/' + returnDate.getFullYear();
     }
 
     ngOnInit() {
