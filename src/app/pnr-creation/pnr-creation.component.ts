@@ -5,6 +5,7 @@ import {HttpErrorResponse} from '@angular/common/http';
 import {FormControl} from '@angular/forms';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
+import {MatSnackBar} from '@angular/material';
 
 @Component({
     selector: 'app-root',
@@ -20,10 +21,11 @@ export class PnrCreationComponent implements OnInit {
     returnHidden = false;
     hide = 'ng-hide';
     myControl = new FormControl();
-    options: string[] = ['F210M42 - Regular', 'F210M92 - Regular', 'F227M02 - Regular', 'F235M90 - Gold', 'F236M30 - Gold', 'F251M38 - Platinum', 'F252M04 - Platinum', 'F254M10 - Exec Plat', 'F258M06 - Exec Plat', '074JUN6 - Concierge key'];
+    options: string[] = ['F210M42 - Regular', 'F235M90 - Gold', 'F251M38 - Platinum', 'F254M10 - Exec Plat', '074JUN6 - Concierge key', 'F210M92 - Regular', 'F227M02 - Regular', 'F236M30 - Gold', 'F252M04 - Platinum', 'F258M06 - Exec Plat'];
     filteredOptions: Observable<string[]>;
+    errorMessage = '';
 
-    constructor(private service: PnrCreationService) {
+    constructor(private service: PnrCreationService, private _snackBar: MatSnackBar) {
         const depatureDate = new Date();
         const returnDate = new Date();
         depatureDate.setDate(depatureDate.getDate() + 30);
@@ -42,6 +44,17 @@ export class PnrCreationComponent implements OnInit {
             );
     }
 
+    public copyInputMessage(inputElement) {
+        inputElement.select();
+        document.execCommand('copy');
+        inputElement.setSelectionRange(0, 0);
+        if (this.pnr) {
+            this._snackBar.open('PNR details copied', '', {
+                duration: 2000,
+            });
+        }
+    }
+
     public tripTypeSelected() {
         this.reservation.tripType === 'OneWay' ? this.returnHidden = true : this.returnHidden = false;
     }
@@ -55,21 +68,22 @@ export class PnrCreationComponent implements OnInit {
     }
 
     public submitData() {
-        console.log(this.reservation.firstName);
-        // const dep = this.reservation.departureDateUI;
-        // const returnDate = this.reservation.returnDateUI;
-        // this.reservation.departureDate = dep.getMonth() + '/' + dep.getDate() + '/' + dep.getFullYear();
-        // this.reservation.returnDate = returnDate.getMonth() + '/' + returnDate.getDate() + '/' + returnDate.getFullYear();
         const spitted = this.reservation.frequentFlyerNumber.split('-');
-        console.log(spitted);
         this.reservation.frequentFlyerNumber = spitted[0].trim();
-
+        this.pnrDetails = ' ';
         this.service.postData(this.reservation).subscribe((posRes) => {
             this.result = posRes;
             console.log(this.result.pnr);
             this.pnr = this.result.pnr;
-            this.pnrDetails = 'PNR: ' + this.result.pnr + ' FirstName: ' + this.result.firstName + ' LastName: ' + this.result.lastName;
-            this.hide = 'ng-show';
+            if (this.pnr) {
+                this.pnrDetails = 'PNR: ' + this.pnr + ', FirstName: ' + this.result.firstName + ', LastName: ' + this.result.lastName;
+                this.hide = 'ng-show';
+            } else {
+                this.errorMessage = 'PNR creation failed';
+                setTimeout( () => {
+                    this.errorMessage = '';
+                }, 3000);
+            }
         }, (errRes: HttpErrorResponse) => {
             if (errRes.error instanceof Error) {
                 console.log('client side error');
@@ -77,7 +91,6 @@ export class PnrCreationComponent implements OnInit {
                 console.log('server side error');
             }
         });
-
     }
 
     public openUrl(url) {
@@ -90,5 +103,9 @@ export class PnrCreationComponent implements OnInit {
     private _filter(value: string): string[] {
         const filterValue = value.toLowerCase();
         return this.options.filter(option => option.toLowerCase().includes(filterValue));
+    }
+
+    openSnackBar(message: string) {
+
     }
 }

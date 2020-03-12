@@ -2,6 +2,7 @@
 <div style="padding-left: 20px; padding-bottom: 5px; padding-right: 20px" >
     <form class="example-form">
         <div style="width: fit-content">
+            <mat-error>{{errorMessage}}</mat-error>
         <br>
             <mat-radio-group [(ngModel)]="reservation.tripType" name="triptype" color="primary" (change)="tripTypeSelected()">
                 <mat-radio-button value="OneWay">One Way</mat-radio-button>
@@ -132,22 +133,26 @@
         </div>
         <br>
         </div>
+
+
     </form>
 </div>
 
-<div style="padding-left: 5px; padding-bottom: 10px; padding-right: 5px; width: fit-content"  >
-    <div>
+<div style="padding-left: 5px; padding-bottom: 5px; padding-right: 5px; width: fit-content"  >
     <mat-card>
             <mat-form-field>
                 <mat-label>Pnr Details:</mat-label>
-                <textarea matInput readonly rows="3">{{this.pnrDetails}}</textarea>
+                <textarea matInput readonly rows="3" #userinput style="width: fit-content">{{this.pnrDetails}}</textarea>
+                <!--<input matInput [(ngModel)]="pnrDetails" #userinput >-->
             </mat-form-field>
-            &nbsp;&nbsp;
-            <button type="submit" (click)="openUrl('qasilo6-sjc.aa.com')" mat-raised-button class="btn btn-outline-primary">qasilo6</button>
+            <!--<a type="submit" (click)="copyInputMessage(userinput)"><mat-icon>file_copy</mat-icon></a>-->
+            <a  type="submit" matTooltip="copy" (click)="copyInputMessage(userinput)" ><mat-icon>file_copy</mat-icon></a>
+             &nbsp;
+            <a (click)="openUrl('qasilo6-sjc.aa.com')" [routerLink]="" matTooltip="opens in new tab">qasilo6</a>
             &nbsp;
-            <button type="submit" (click)="openUrl('qasilo17-sjc.aa.com')" mat-raised-button class="btn btn-outline-primary">qasilo17</button>
+            <a (click)="openUrl('qasilo17-sjc.aa.com')"  [routerLink]="" matTooltip="opens in new tab">qasilo17</a>
             &nbsp;
-            <button type="submit" (click)="openUrl('iqa2.aa.com')" mat-raised-button class="btn btn-outline-primary">iqa2</button>
+            <a (click)="openUrl('iqa2.aa.com')"  [routerLink]="" matTooltip="opens in new tab">iqa2</a>
+            <!--<button (click)="copyInputMessage(userinput)" value="click to copy" mat-raised-button class="btn btn-outline-primary">Copy To ClipBoard</button>-->
     </mat-card>
-    </div>
 </div>

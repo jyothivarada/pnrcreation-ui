@@ -3,7 +3,11 @@ import {NgModule} from '@angular/core';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatInputModule} from '@angular/material/input';
-import {MatCardModule, MatDatepickerModule, MatNativeDateModule, MatRadioModule, MatExpansionModule, MatGridListModule, MatCheckboxModule, MatAutocompleteModule} from '@angular/material';
+import {MatCardModule, MatDatepickerModule, MatNativeDateModule, MatRadioModule, MatExpansionModule, MatGridListModule, MatCheckboxModule, MatAutocompleteModule} from "@angular/material";
+import {MatIconModule} from "@angular/material";
+import {MatToolbarModule} from "@angular/material";
+import {MatTooltipModule} from "@angular/material";
+import {MatSnackBarModule} from "@angular/material";
 import {MatSelectModule} from '@angular/material/select';
 import {MatButtonModule} from '@angular/material/button';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
@@ -11,7 +15,6 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {PnrCreationComponent} from './pnr-creation/pnr-creation.component';
 import {CancelPnrComponent} from './cancel-pnr/cancel-pnr.component';
 import {TicketPnrComponent} from './ticket-pnr/ticket-pnr.component';
-import {MatToolbarModule} from '@angular/material/toolbar';
 import {HomeComponent} from './home/home.component';
 import {RouterModule, Routes} from '@angular/router';
 import {LoaderComponent} from './loader/loader.component';
@@ -56,6 +59,9 @@ const appRoutes: Routes = [{path: '', component: PnrCreationComponent},
         MatCheckboxModule,
         MatAutocompleteModule,
         ReactiveFormsModule,
+        MatIconModule,
+        MatTooltipModule,
+        MatSnackBarModule,
         RouterModule.forRoot(appRoutes)
     ],
     providers: [
