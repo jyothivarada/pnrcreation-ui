@@ -1,5 +1,4 @@
-
-<div style="padding-left: 20px; padding-bottom: 5px; padding-right: 20px" >
+<div style="padding-left: 20px; padding-bottom: 5px; padding-right: 20px">
     <form class="example-form">
         <div style="width: fit-content">
             <mat-error>{{errorMessage}}</mat-error>
@@ -33,8 +32,6 @@
             <input matInput placeholder="Destination" name="destination" [(ngModel)]="reservation.destination" maxlength="3" pattern="[a-zA-Z]*" oninput="this.value = this.value.toUpperCase()">
         </mat-form-field>
         <br>
-
-
         <mat-form-field>
             <mat-label>Departure Date</mat-label>
             <input matInput [matDatepicker]="departureDt" [value]="reservation.departureDateUI" (dateChange)="onChangeDeparture($event.value)" >
@@ -48,7 +45,6 @@
             <mat-datepicker-toggle matSuffix [for]="returnDt"></mat-datepicker-toggle>
             <mat-datepicker #returnDt></mat-datepicker>
         </mat-form-field>
-
         <br>
         <mat-accordion>
             <mat-expansion-panel style="width: fit-content" id="expansionPanel">
@@ -57,6 +53,22 @@
                     Advanced Options
                     </mat-panel-title>
                 </mat-expansion-panel-header>
+                <br>
+                <mat-form-field class="example-full-width" style="width:220px">
+                    <input type="text"
+                           placeholder="Frequent Flyer Number"
+                           [(ngModel)]="reservation.frequentFlyerNumber"
+                           aria-label="Number"
+                           matInput
+                           [formControl]="myControl"
+                           [matAutocomplete]="auto" matTooltip="lastname and firstname should match with frequent flyer number">
+                    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="changeFrequentFlyer($event.option.value)">
+                        <mat-option *ngFor="let option of filteredOptions | async" [value]="option.number" >
+                            {{option.number}}
+                        </mat-option>
+                    </mat-autocomplete>
+                </mat-form-field>
+                    <a matTooltip="Lastname and Firstname should match with Frequent Flyer Number"><mat-icon style="font-size: 15px; padding-top: 10px">info</mat-icon></a>
                 <br>
                 <mat-form-field>
                     <mat-label>Airline</mat-label>
@@ -70,27 +82,20 @@
                     </mat-select>
                 </mat-form-field>
                 &nbsp;
-                <!--<mat-form-field>-->
-                    <!--<input matInput placeholder="Frequent Flyer Number" name="frequentFlyerNumber" [(ngModel)]="reservation.frequentFlyerNumber">-->
-                <!--</mat-form-field>-->
 
-                <mat-form-field class="example-full-width">
-                    <input type="text"
-                           placeholder="Frequent Flyer Number"
-                           [(ngModel)]="reservation.frequentFlyerNumber"
-                           aria-label="Number"
-                           matInput
-                           [formControl]="myControl"
-                           [matAutocomplete]="auto" >
-                    <mat-autocomplete #auto="matAutocomplete">
-                        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-                            {{option}}
+                <mat-form-field>
+                    <mat-label>Cabin Class</mat-label>
+                    <mat-select [(ngModel)]="reservation.classCabin" name="classCabin">
+                        <mat-option value="MainCabin">
+                            Main Cabin
                         </mat-option>
-                    </mat-autocomplete>
+                        <mat-option value="Business">
+                            Business Or First
+                        </mat-option>
+                    </mat-select>
                 </mat-form-field>
-
-                <br>
-                <mat-checkbox [(ngModel)]="reservation.selectSeats" color="primary" [ngModelOptions]="{standalone: true}">Seats</mat-checkbox>
+                <br/>
+                <mat-checkbox [(ngModel)]="reservation.selectSeats" color="primary" [ngModelOptions]="{standalone: true}">Assign Seats</mat-checkbox>
                 &nbsp;
                 &nbsp;
                 &nbsp;
@@ -102,13 +107,7 @@
                 &nbsp;
                 &nbsp;
                 &nbsp;
-                &nbsp;
-                &nbsp;
-                &nbsp;
-                &nbsp;
-                &nbsp;
-
-                <mat-checkbox [(ngModel)]="reservation.multiPassenger" color="primary" [ngModelOptions]="{standalone: true}" style="padding-left: 6px">Adult Passenger</mat-checkbox>
+                <mat-checkbox [(ngModel)]="reservation.multiPassenger" color="primary" [ngModelOptions]="{standalone: true}">Add Adult Passenger</mat-checkbox>
                 <br>
                 <mat-checkbox [(ngModel)]="reservation.childPassenger" color="primary" [ngModelOptions]="{standalone: true}">Child Passenger</mat-checkbox>
                 &nbsp;
@@ -133,19 +132,14 @@
         </div>
         <br>
         </div>
-
-
     </form>
 </div>
-
-<div style="padding-left: 5px; padding-bottom: 5px; padding-right: 5px; width: fit-content"  >
+<div style="padding-left: 5px; padding-bottom: 5px; padding-right: 5px; width: fit-content">
     <mat-card>
             <mat-form-field>
                 <mat-label>Pnr Details:</mat-label>
                 <textarea matInput readonly rows="3" #userinput style="width: fit-content">{{this.pnrDetails}}</textarea>
-                <!--<input matInput [(ngModel)]="pnrDetails" #userinput >-->
             </mat-form-field>
-            <!--<a type="submit" (click)="copyInputMessage(userinput)"><mat-icon>file_copy</mat-icon></a>-->
             <a  type="submit" matTooltip="copy" (click)="copyInputMessage(userinput)" ><mat-icon>file_copy</mat-icon></a>
              &nbsp;
             <a (click)="openUrl('qasilo6-sjc.aa.com')" [routerLink]="" matTooltip="opens in new tab">qasilo6</a>
@@ -153,6 +147,5 @@
             <a (click)="openUrl('qasilo17-sjc.aa.com')"  [routerLink]="" matTooltip="opens in new tab">qasilo17</a>
             &nbsp;
             <a (click)="openUrl('iqa2.aa.com')"  [routerLink]="" matTooltip="opens in new tab">iqa2</a>
-            <!--<button (click)="copyInputMessage(userinput)" value="click to copy" mat-raised-button class="btn btn-outline-primary">Copy To ClipBoard</button>-->
     </mat-card>
 </div>

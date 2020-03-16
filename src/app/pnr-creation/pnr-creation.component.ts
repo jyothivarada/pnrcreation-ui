@@ -6,6 +6,8 @@ import {FormControl} from '@angular/forms';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import {MatSnackBar} from '@angular/material';
+import {FrequentFlyer} from "../model/FrequentFlyer";
+import { _ } from 'underscore';
 
 @Component({
     selector: 'app-root',
@@ -20,8 +22,17 @@ export class PnrCreationComponent implements OnInit {
     reservation: Reservation = new Reservation();
     returnHidden = false;
     hide = 'ng-hide';
+    frequentFlyers = [];
     myControl = new FormControl();
-    options: string[] = ['F210M42 - Regular', 'F235M90 - Gold', 'F251M38 - Platinum', 'F254M10 - Exec Plat', '074JUN6 - Concierge key', 'F210M92 - Regular', 'F227M02 - Regular', 'F236M30 - Gold', 'F252M04 - Platinum', 'F258M06 - Exec Plat'];
+    options: string[] = ['F210M42 - Regular',
+        'F235M90 - Gold', 'F251M38 - Platinum',
+        'F254M10 - Exec Plat',
+        '074JUN6 - Concierge key',
+        'F210M92 - Regular',
+        'F227M02 - Regular',
+        'F236M30 - Gold',
+        'F252M04 - Platinum',
+        'F258M06 - Exec Plat'];
     filteredOptions: Observable<string[]>;
     errorMessage = '';
 
@@ -42,6 +53,14 @@ export class PnrCreationComponent implements OnInit {
                 startWith(''),
                 map(value => this._filter(value))
             );
+        this.frequentFlyers.push(this.createFrequentFlyer('Main', 'MobileTest', 'F210M42 - Regular'));
+        this.frequentFlyers.push(this.createFrequentFlyer('Gold', 'MobileTest', 'F235M90 - Gold'));
+        this.frequentFlyers.push(this.createFrequentFlyer('Plat', 'MobileTest', 'F251M38 - Plat'));
+        this.frequentFlyers.push(this.createFrequentFlyer('Exec', 'MobileTest', 'F258M06 - Exec Platinum'));
+        // this.frequentFlyers.push(this.createFrequentFlyer('Main', 'AMRB', '074JUN6 - Concierge key'));
+        this.frequentFlyers.push(this.createFrequentFlyer('Gold', 'MobileTest', 'F236M30 - Gold'));
+        this.frequentFlyers.push(this.createFrequentFlyer('Plat', 'MobileTest', 'F252M04 - Platinum'));
+
     }
 
     public copyInputMessage(inputElement) {
@@ -52,6 +71,14 @@ export class PnrCreationComponent implements OnInit {
             this._snackBar.open('PNR details copied', '', {
                 duration: 2000,
             });
+        }
+    }
+
+    public changeFrequentFlyer(inputElement) {
+        if (_.findWhere(this.frequentFlyers, {number: inputElement})) {
+            const selectedValue = _.findWhere(this.frequentFlyers, {number: inputElement});
+            this.reservation.lastName = selectedValue.lastName;
+            this.reservation.firstName = selectedValue.firstName;
         }
     }
 
@@ -102,10 +129,14 @@ export class PnrCreationComponent implements OnInit {
 
     private _filter(value: string): string[] {
         const filterValue = value.toLowerCase();
-        return this.options.filter(option => option.toLowerCase().includes(filterValue));
+        return this.frequentFlyers.filter(option => option.number.toLowerCase().includes(filterValue));
     }
 
-    openSnackBar(message: string) {
-
+    private createFrequentFlyer(firstName, lastName, frequentFlyerNumber) {
+        const frequentFlyer = new FrequentFlyer();
+        frequentFlyer.firstName = firstName;
+        frequentFlyer.lastName = lastName;
+        frequentFlyer.number = frequentFlyerNumber;
+        return frequentFlyer;
     }
 }

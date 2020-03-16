@@ -1,0 +1,12 @@
+html, body {
+    height: 100%;
+}
+
+.bgimg {
+    color: white;
+    background-size: cover;
+    background-position: bottom;
+    background: url('../../assets/cloud-3047911_1920.jpg') no-repeat center center fixed;
+    width: 100%;
+    height: 100%;
+}

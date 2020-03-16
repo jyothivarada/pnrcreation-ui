@@ -16,5 +16,6 @@ export class Reservation {
     seniorPassenger = false;
     infantPassengerInLap = false;
     infantPassengerInSeat = false;
+    classCabin = 'MainCabin';
 
 }
