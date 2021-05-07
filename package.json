@@ -28,7 +28,7 @@
     "bootstrap": "^4.4.1",
     "jquery": "^3.4.1",
     "ngx-clipboard": "^13.0.0",
-    "underscore": "1.9.2"
+    "underscore": "1.12.1"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.803.18",
